@@ -25,7 +25,7 @@ MongoDB for Database
 # Installation
 ## 1. Clone the project
 From your computer, open terminal
-Run git clone git@github.com:patsicko/my-brand-bakend.git to clone the repository OR Download the project
+Run git clone https://github.com/Tparfaite/my-brand-Tparfaite-backend.git to clone the repository OR Download the project
 ## 2. Setting up the environment
 - Create a file and name it .env in root directory
 - Find a file named .env.example
