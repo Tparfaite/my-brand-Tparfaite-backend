@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import dbConnect from "./database/db";
 import ContactRoute from "./routes/contactRoute";
+import UserRoute from "./routes/userRoute";
 
 mongoose.set('strictQuery',true);
 
@@ -23,5 +24,6 @@ app.listen(port,()=>{
 dbConnect();
 
 app.use("/api",ContactRoute);
+app.use("/api",UserRoute);
 
 console.log("My brand project backend");
