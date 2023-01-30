@@ -6,5 +6,7 @@ const UserRoute=express.Router();
 
 UserRoute.post("/createUser",UserController.createUser);
 UserRoute.get("/getAllUsers",verifyToken,UserController.getUsers);
+UserRoute.get("/getOneUser/:id",verifyToken, UserController.getSingleUser);
+UserRoute.get("/deleteUser/:id",verifyToken,UserController.deleteUser);
 
 export default UserRoute;
