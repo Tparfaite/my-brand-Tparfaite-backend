@@ -30,6 +30,26 @@ class UserController {
             })
         }
     }
+    
+
+    static async getUsers(req,res){
+        try{
+        
+            const users= await User.find();
+            res.status(201).json({
+                status:"success",
+                message:{
+                    "post":users
+                }
+            })
+        }
+        catch(error){
+            res.status(404).json({
+                "status":"error",
+                "message":error.message
+            })
+        }
+    }
 
 
 }
