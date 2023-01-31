@@ -6,6 +6,8 @@ import dbConnect from "./database/db";
 import ContactRoute from "./routes/contactRoute";
 import UserRoute from "./routes/userRoute";
 import BlogRoute from "./routes/blogRoute";
+import AdminRoute from "./routes/adminRoute";
+
 
 mongoose.set('strictQuery',true);
 
@@ -27,5 +29,6 @@ dbConnect();
 app.use("/api",ContactRoute);
 app.use("/api",UserRoute);
 app.use("/api",BlogRoute);
+app.use("/api",AdminRoute)
 
 console.log("My brand project backend");
