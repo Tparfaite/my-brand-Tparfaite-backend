@@ -21,7 +21,7 @@ class UserController {
             password:hashedPassword
          })
          await user.save();
-         res.status(200).json({
+         res.status(201).json({
             "status":"successful created",
             "post":user
          });
