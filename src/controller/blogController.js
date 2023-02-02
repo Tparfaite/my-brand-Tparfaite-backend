@@ -88,6 +88,27 @@ class BlogController {
     }
    }
 
+   static async updateBlog(req,res){
+
+    try {
+        const blog = await Blog.findById(req.params.id);
+        await cloudinary.uploader.destroy(blog.blogImage);
+        const result = await cloudinary.uploader.upload(req.file.path);
+        const updatedBlog = await Blog.findByIdAndUpdate(req.params.id,{$set:{
+            blogTitle:req.body.blogTitle,
+            blogAuthor:req.body.blogAuthor,
+            blogImage:result.secure_url,
+            blogContent:req.body.blogContent,
+        }},{new:true});
+        res.status(200).json({
+          status:"success",
+          data:updatedBlog
+        });
+      } catch (error) {
+        res.status(500).json({ error: error.message });
+      }
+    }
+
 }
 
 export default BlogController;
