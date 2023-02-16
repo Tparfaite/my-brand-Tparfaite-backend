@@ -21,6 +21,7 @@ class UserController {
             password:hashedPassword
          })
          await user.save();
+
          res.status(201).json({
             "status":"successful created",
             "post":user
@@ -28,6 +29,7 @@ class UserController {
          console.log("user created successfully");
         }
         catch(error){ 
+            console.log("error",error);
             res.status(404).json({
                 "status":"error",
                 "message":error.message
@@ -40,7 +42,7 @@ class UserController {
         try{
         
             const users= await User.find();
-            res.status(201).json({
+            res.status(200).json({
                 status:"success",
                 message:{
                     "post":users
@@ -80,7 +82,7 @@ class UserController {
     static async deleteUser(req,res){
         try{
             await User.findByIdAndDelete(req.params.id);
-            res.status(200).json({
+            res.status(204).json({
                 "status":'success',
                 "message":"The user deleted successfully!"
             })

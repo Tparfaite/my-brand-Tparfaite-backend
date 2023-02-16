@@ -29,7 +29,7 @@ class ContactController {
     static async getMessages(req,res) {
         try{
           const messages=await Contact.find();
-          res.status(201).json({
+          res.status(200).json({
             status:"success",
             data:{
                 "posts":messages
@@ -66,7 +66,7 @@ class ContactController {
     static async deleteMessage(req,res){
         try{
             await Contact.findByIdAndDelete(req.params.id);
-            res.status(200).json({
+            res.status(204).json({
                 "status":"success",
                 "message":"message deleted successfully"
             })

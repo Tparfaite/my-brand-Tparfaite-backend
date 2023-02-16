@@ -11,7 +11,7 @@ const {error,value}= userValidationSchema.validate(req.body, {abortEarly:false})
     })
  }
  req.validUser=value;
- console.log(req);
+//  console.log(req);
  next();
 }
 

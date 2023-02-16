@@ -8,6 +8,6 @@ const ContactRoute=express.Router();
 ContactRoute.post("/createMessage", validatedContact,ContactController.CreateMessage);
 ContactRoute.get("/getAllMessages",verifyToken,ContactController.getMessages);
 ContactRoute.get("/getSingleMessage/:id",verifyToken,ContactController.getSingleMessage);
-ContactRoute.get("/deleteMessage/:id",verifyToken,ContactController.deleteMessage);
+ContactRoute.delete("/deleteMessage/:id",ContactController.deleteMessage);
 
 export default ContactRoute;
