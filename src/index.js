@@ -7,6 +7,10 @@ import ContactRoute from "./routes/contactRoute";
 import UserRoute from "./routes/userRoute";
 import BlogRoute from "./routes/blogRoute";
 import AdminRoute from "./routes/adminRoute";
+import {serve, setup} from "swagger-ui-express";
+import swaggerDoc from "swagger-ui-express";
+import swaggerDocumentation from "./documentation";
+
 
 
 mongoose.set('strictQuery',true);
@@ -29,6 +33,11 @@ dbConnect();
 app.use("/api",ContactRoute);
 app.use("/api",UserRoute);
 app.use("/api",BlogRoute);
-app.use("/api",AdminRoute)
+app.use("/api",AdminRoute);
+app.use("/documentation",swaggerDoc.serve);
+app.use("/documentation",swaggerDoc.setup(swaggerDocumentation))
 
 console.log("My brand project backend");
+
+
+export default app;
