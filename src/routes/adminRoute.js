@@ -1,6 +1,6 @@
 import express from "express";
 import adminController from "../controller/adminController";
-import verifyToken from "../middleWare/authenticate";
+import verifyToken from "../middleware/authenticate";
 import validatedUser from "../middleware/validatedUser";
 
 
