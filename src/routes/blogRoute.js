@@ -1,7 +1,7 @@
 import express from "express";
 import BlogController from "../controller/blogController";
 // import validatedBlog from "../middleware/validatedBlog";
-import verifyToken from "../middleWare/authenticate";
+import verifyToken from "../middleware/authenticate";
 import upload from "../upload/multer";
 import { isAdmin,findUser } from "../middleware/isAdmin";
 

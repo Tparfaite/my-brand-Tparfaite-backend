@@ -1,7 +1,7 @@
 import express from "express";
 import ContactController from "../controller/contactController";
-import validatedContact from "../middleWare/validatedContact";
-import verifyToken from "../middleWare/authenticate";
+import validatedContact from  '../middleware/validatedContact'
+import verifyToken from "../middleware/authenticate";
 
 const ContactRoute=express.Router();
 
