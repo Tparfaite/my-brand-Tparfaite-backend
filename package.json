@@ -4,9 +4,11 @@
   "description": "This brand of mine will help people to reach me, to know more about me, my skills and my work experience, and have access on my blogs\r # Project Description\r  This project contains Model and controller for for the app. It creates APIs endpoints that the client uses to access the data on server\r # Technonlogies\r - Environment : Nodejs\r - Package Manager : NPM\r - Compiler : Babel\r - Framework: Express.js\r - Database: MongoDB",
   "main": "index.js",
   "scripts": {
+    
+    "build": "babel src -d dist",
+    "start": "node dist/index.js",
     "dev": "nodemon --exec  babel-node src/index.js",
-    "start": "node --experimental-specifier-resolution=node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nyc mocha --recursive --exit --timeout 100000 --require @babel/register src/tests/**/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -26,19 +28,25 @@
     "@babel/register": "^7.18.9",
     "@babel/runtime": "^7.20.13",
     "bcrypt": "^5.1.0",
+    "chai-http": "^4.3.0",
     "cloudinary": "^1.33.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "joi": "^17.7.0",
     "jsonwebtoken": "^9.0.0",
+    "mocha": "^10.2.0",
     "mongoose": "^6.9.0",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "nyc": "^15.1.0",
+    "swagger-ui-express": "^4.6.0"
   },
   "devDependencies": {
     "@babel/node": "^7.20.7",
     "@babel/plugin-transform-runtime": "^7.19.6",
     "@babel/preset-env": "^7.20.2",
-    "nodemon": "^2.0.20"
+    "chai": "^4.3.7",
+    "nodemon": "^2.0.20",
+    "supertest": "^6.3.3"
   }
 }
