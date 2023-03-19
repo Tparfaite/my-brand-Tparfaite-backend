@@ -1,43 +1,60 @@
 name: CI
+
 on:
   push:
     branches:
       - develop
+    paths:
+      - 'src/**'
+      - 'test/**'
+      - '*.json'
+      - 'package-lock.json'
   pull_request:
-    branches:
-      - develop
+    paths:
+      - 'src/**'
+      - 'test/**'
+      - '*.json'
+      - 'package-lock.json'
+
+env:
+  MONGODB_URL: ${{ secrets.MONGODB_URL }}
+  CLOUD_NAME: ${{ secrets.CLOUD_NAME }}
+  API_KEY: ${{ secrets.API_KEY }}
+  API_SECRET: ${{ secrets.API_SECRET }}
+  JWT_SECRET: ${{ secrets.JWT_SECRET }}
+  PORT: ${{ secrets.PORT }}
+  CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
 
 jobs:
-  build:
-    runs-on: ${{ matrix.os }}
+  test:
     strategy:
       matrix:
-        os: [ubuntu-latest]
-        node-version: [16.x]
-    env:
-      MONGODB_URL: ${{secrets.MONGODB_URL}}
-      CLOUD_NAME: ${{secrets.CLOUD_NAME}}
-      API_KEY: ${{secrets.API_KEY}}
-      API_SECRET: ${{secrets.API_SECRET}}
-      JWT_SECRET: ${{secrets.JWT_SECRET}}
-      PORT: ${{secrets.PORT}}
-
+        platform: [ ubuntu-latest, macos-latest ]
+        node: [ '12', '14' ]
+    name: Test / Node ${{ matrix.node }} / ${{ matrix.platform }}
+    runs-on: ${{ matrix.platform }}
     steps:
-      - uses: actions/checkout@v1
-      - name: Set up Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: Set up CodeClimate Test Reporter
-        run: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-          chmod +x ./cc-test-reporter
-      - run: npm install
-      - run: npm test
-      - name: Upload coverage to CodeClimate
-        if: always()
+          node-version: ${{ matrix.node }}
+      - name: Install Dependencies
+        run: npm install
+        run: npm install codeclimate-test-reporter@0.5.1
+      - name: Build
+        run: npm run build
+      - name: Test
+        run: npm test
+      - name: Coverage
+        if: success()
+        run: npm run coverage
         env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_TEST_REPORTER_ID }}
-        run: |
-          ./cc-test-reporter format-coverage -t lcov coverage/lcov.info
-          ./cc-test-reporter upload-coverage
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+      - name: Upload coverage to Code Climate
+        if: success()
+        uses: paambaati/codeclimate-action@v2.2.4
+        with:
+          coverageCommand: ./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls
+          debug: true
+
