@@ -1,5 +1,7 @@
 # Project Title
 ## my-brand-Tparfaite-backend
+[![Maintainability](https://api.codeclimate.com/v1/badges/ec57aed390636cadaeac/maintainability)](https://codeclimate.com/github/Tparfaite/my-brand-Tparfaite-backend/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ec57aed390636cadaeac/test_coverage)](https://codeclimate.com/github/Tparfaite/my-brand-Tparfaite-backend/test_coverage)
 # Project vision
 This brand of mine will help people to reach me, to know more about me, my skills and my work experience, and have access on my blogs
 # Project Description
