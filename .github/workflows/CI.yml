@@ -15,7 +15,7 @@ jobs:
         os: [ubuntu-latest]
         node-version: [16.x]
     env:
-       MONGODB_URL: ${{secrets.MONGODB_URL}}
+      MONGODB_URL: ${{secrets.MONGODB_URL}}
       CLOUD_NAME: ${{secrets.CLOUD_NAME}}
       API_KEY: ${{secrets.API_KEY}}
       API_SECRET: ${{secrets.API_SECRET}}
